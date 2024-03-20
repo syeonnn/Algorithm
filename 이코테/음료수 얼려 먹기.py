@@ -1,5 +1,3 @@
-# DFS_음료수 얼려 먹기
-
 n, m = map(int, input().split()) # 가로, 세로
 graph = []
 for i in range(n):
