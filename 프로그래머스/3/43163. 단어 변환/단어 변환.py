@@ -10,8 +10,6 @@ def solution(begin, target, words):
     def bfs(begin, target, words):
         # 비교대상 단어와 알파벳이 1개 차이나는 단어가 1개 이상일 수 있음
         # ( 해당 단어, 변환순서(횟수) ) 쌍으로 같이 저장해야 함!!
-    
-        count = 0
         
         que = deque()
         que.append((begin,0))
