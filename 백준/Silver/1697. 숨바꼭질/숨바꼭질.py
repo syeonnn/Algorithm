@@ -21,7 +21,7 @@ def bfs():
     if cur == K:
       return count[K]-1
       
-    for i in (2*cur, cur-1, cur+1):
+    for i in [2*cur, cur-1, cur+1]:
       if 0 <= i <= 100000 and count[i] == 0:
         count[i] = count[cur] + 1
         que.append(i)
