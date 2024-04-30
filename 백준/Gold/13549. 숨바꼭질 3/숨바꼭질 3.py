@@ -12,7 +12,7 @@ visited = [-1 for _ in range(100001)]
 def bfs(x):
   que = deque()
   que.append(x)
-  visited[x] = 0
+  visited[x] = 0 # 맨 처음 방문 표시 꼭 하기!!!!!
 
   while que:
     x = que.popleft() 
@@ -27,20 +27,19 @@ def bfs(x):
     for nx in (x-1,x+1,x*2):
       if nx < 0 or nx >= 100001 or visited[nx] != -1:
         continue
-      # if 0<=nx<100001 and visited[nx] == 0:  
+
       if nx == x*2:
         visited[nx] = visited[x]
-        # if nx == 0: # 0또는1의 경우 엣지케이스 주의
+        que.appendleft(nx) # 우선, 2배 연산이 가장 효율적인 길이다
+
+        # 0또는1의 경우 엣지케이스 주의하는 문제인줄 알았지만
+        # 초기 방문 표시를 안해서 생긴 문제임
+        # if nx == 0: 
         #   que.append(nx)
         #   continue
-        que.appendleft(nx) # 우선, 2배 연산이 가장 효율적인 길이다
+        
       else:
         visited[nx] = visited[x] + 1
         que.append(nx)
-
-# if n == 0: 
-#   print(bfs(1)+1)
-# else :
-#   print(bfs(n))
 
 print(bfs(n))
