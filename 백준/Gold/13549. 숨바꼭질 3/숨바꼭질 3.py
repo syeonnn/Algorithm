@@ -30,9 +30,9 @@ def bfs(x):
       # if 0<=nx<100001 and visited[nx] == 0:  
       if nx == x*2:
         visited[nx] = visited[x]
-        if nx == 0: # 0또는1의 경우 엣지케이스 주의
-          que.append(nx)
-          continue
+        # if nx == 0: # 0또는1의 경우 엣지케이스 주의
+        #   que.append(nx)
+        #   continue
         que.appendleft(nx) # 우선, 2배 연산이 가장 효율적인 길이다
       else:
         visited[nx] = visited[x] + 1
