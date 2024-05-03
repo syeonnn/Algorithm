@@ -1,32 +1,28 @@
 from itertools import permutations
-
-
     
 def solution(k, dungeons):
-    # 현재 피로도 k
-    # 최소 필요 피로도 >= 소모 피로도 dungeons     
+    # k: 현재 피로도have
+    # dungeons: 최소 필요 피로도need, 소모 피로도cost 
     # 던전 방문 순서 조정으로 유저가 탐험할수 있는 최대 던전 수 구하기
-    answer = -1
+    answer = -1               
     
-    def explore(p,hp,idx):
-        nonlocal answer
+    permutationList = permutations(dungeons)
+    
+    for p in (permutationList):
+        have = k
+        count = 0
         
-        while idx < len(dungeons):
-            if hp >= p[idx][0]:
-                hp -= p[idx][1]
-                idx += 1
-                explore(p,hp,idx)
-            else:
-                answer = max(answer, idx)
+        for need, cost in p:
+            # 가질 수 있는 최대값이 나오면 for루프 종료
+            if answer == len(dungeons):
                 break
-        answer = max(answer, idx)
                 
-    
-    permutationList = permutations(dungeons,len(dungeons))
-    for idx, p in enumerate(permutationList):
-        hp = k
-        explore(p,hp,0) # 해당 조합에서 (hp피로도=k 상태로) 첫번째 던전부터 탐색
-        if answer == len(dungeons):
-            break
+            if have >= need:
+                have -= cost
+                count += 1
+            else:
+                answer = max(answer,count)
+                break
+            answer = max(answer,count)
 
     return answer
