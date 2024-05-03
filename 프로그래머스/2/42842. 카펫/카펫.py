@@ -12,6 +12,5 @@ def solution(brown, yellow):
             if (yw*2 + yh*2 + 4) == brown:
                 answer.append(yw +2)
                 answer.append(yh +2)
-                break
+                return answer
                 
-    return answer
