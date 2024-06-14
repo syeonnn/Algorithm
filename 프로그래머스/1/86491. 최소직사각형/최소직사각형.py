@@ -1,7 +1,9 @@
 def solution(sizes):
     answer = 0
-    # 긴 변은 최대한 길게, 짧은 변은 짧은 길이 중에 가장 길게
-    w = max(max(x) for x in sizes)
-    h = max(min(y) for y in sizes)
-    answer = w * h
+    # 더 긴 변 중에 젤 긴 길이
+    w = max([max(l) for l in sizes])
+    # 더 짧은 변 중에 젤 긴 길이
+    h = max([min(l) for l in sizes])
+    
+    answer = w*h
     return answer
