@@ -2,37 +2,29 @@ from collections import deque
 
 def solution(numbers, target):
     answer = 0
-    queue = deque()
     n = len(numbers)
-    queue.append((numbers[0],0))
-    queue.append((-1*numbers[0],0))
     
-    # BFS
-    while queue:
-        temp, idx = queue.popleft()
-        idx += 1
-        if idx == n:
-            if temp == target:
-                 answer+=1
-        else:
-            queue.append((temp+numbers[idx],idx)) 
-            queue.append((temp-numbers[idx],idx)) 
-                   
+    # dfs, bfs로 모든 경우를 탐색
+    
+    def bfs(num,idx):    
+        cnt = 0
+        que = deque()
+        que.append((num,idx))
+        que.append((-num,idx))
+
+        while que:
+            num, idx = que.popleft()
+            idx += 1
+            
+            if idx == n: # 단문으로 2가지 조건 합칠 수 없음! 아래 조건문 else와의 관계에 유의!
+                if num == target:
+                    cnt += 1
+            else:
+                # for calc in [-1,1]:
+                que.append((num + numbers[idx],idx))
+                que.append((num - numbers[idx],idx))
+                
+        return cnt
+        
+    answer = bfs(numbers[0],0)
     return answer
-
-    #DFS
-    def dfs(idx,result):
-        if idx == n:
-            # target 값이면
-            if result == target:
-                nonlocal answer
-                answer+=1
-            # 아니면
-            return
-        else:
-            dfs(idx+1, result+numbers[idx])
-            dfs(idx+1, result-numbers[idx])
-
-    # numbers 배열의 첫 번째 원소부터 탐색
-    # dfs(0, 0)
-    
