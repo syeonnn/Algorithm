@@ -1,0 +1,4 @@
+-- 2번 형질 보유X , 1번이나 3번 형질 보유O
+SELECT COUNT(*) AS COUNT
+FROM ECOLI_DATA
+WHERE (GENOTYPE & 2) = 0 AND ((GENOTYPE & 1) = 1 OR (GENOTYPE & 4) = 4)
