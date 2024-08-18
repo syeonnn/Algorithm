@@ -1,24 +1,13 @@
-import java.util.*;
-
 class Solution {
     public int solution(int n) {
-        int answer = 0;
+        String a = "";
         
-        ArrayList<Integer> arrBy3 = new ArrayList<>();
-        int nBy3 = 0;
-
-        while(n >= 3){
-            arrBy3.add(n % 3);
+        while(n > 0){
+            a = (n % 3) + a;
             n /= 3;
         }
-        arrBy3.add(n);
-        
-        Collections.reverse(arrBy3);
-        
-        for (int i = 0; i < arrBy3.size(); i++) {
-            answer += arrBy3.get(i) * Math.pow(3,i);
-        }
+        a = new StringBuilder(a).reverse().toString();
 
-        return answer;
+        return Integer.parseInt(a,3);
     }
 }
