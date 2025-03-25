@@ -1,15 +1,19 @@
+# arr = [0~9 구성 배열... 연속없게 전부 제거]
 from collections import deque
 
-def solution(arr):
-    answer = [arr[0]] + []
+def solution(arr):    
+    arr = deque(arr)
+    x = arr.popleft()
+    answer = deque([x])
     
-    cmp = arr[0]
-    
-    for a in arr[1:]:
-        if cmp == a:
+    for a in range(len(arr)):
+        y = arr.popleft()
+        
+        if x == y:
             continue
         else:
-            answer.append(a)
-            cmp = a
+            answer.append(y)
+            x = y
             
-    return answer
+    return list(answer)
+    
