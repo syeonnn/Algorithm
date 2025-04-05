@@ -1,29 +1,35 @@
+from itertools import permutations
 import math
-from itertools import permutations # combinations
 
 def solution(numbers):
     answer = 0
-    nums = list(numbers)
     
-    cases = set()
-    # 조합가능한 모든 경우 만들기 (순열)
-    for i in range(1, len(nums)+1): # numbers 원소 중 i개를 조합
-        permutationList = permutations(nums,i)
-        for p in permutationList:
-            pItem = int(''.join(p))
-            cases.add(pItem)
-            
-     # 소수 찾기
-    def isPrime(x):
-        if x <= 1:
+    # 순열조합
+    convert_numers = list(numbers)
+    nums = set()
+    
+    for j in range(1, len(numbers)+1):
+        perm_numbers = permutations(convert_numers, j)
+        for p in perm_numbers:
+            num = int(''.join(p))
+            nums.add(num)
+    
+    def prime(num):
+        # 초기화: 0과 1은 소수가 아니며, 2를 제외한 짝수는 미리 제거
+        if num <= 1:
+            return False;
+        if num != 2 and num % 2 == 0:
             return False
-        for i in range(2, int(math.sqrt(x))+1):
-            if x % i == 0:
-                return False # 소수 X
-        return True # 소수 O
+        
+        # 3부터 sqrt(n)까지 홀수만 검사
+        for i in range(2, int(math.sqrt(num))+1):
+            if num % i == 0:
+                return False
+            
+        return True;
     
-    for x in cases:
-        if isPrime(x):
+    for n in nums:
+        if prime(n):
             answer += 1
-    
-    return(answer)
+            
+    return answer;
