@@ -1,9 +1,6 @@
 def solution(sizes):
-    answer = 0
-    # 더 긴 변 중에 젤 긴 길이
-    w = max([max(l) for l in sizes])
-    # 더 짧은 변 중에 젤 긴 길이
-    h = max([min(l) for l in sizes])
+
+    a = [min(w,h) for [w,h] in sizes]
+    b = [max(w,h) for [w,h] in sizes]
     
-    answer = w*h
-    return answer
+    return max(a) * max(b)
