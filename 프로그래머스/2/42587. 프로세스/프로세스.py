@@ -1,22 +1,18 @@
 from collections import deque
 
 def solution(priorities, location):
+    
+    # location 위치의 프로세스가 몇 번쨰로 실행되는지
     answer = 0
     
-    # 알파벳 순서 배열 == priorities
-    processes = deque(enumerate(priorities))
-
-    # location번째 인덱스의 값이 몇번째로 실행되는지
-    while processes:
-        i, p = processes.popleft()
+    priorities = deque(enumerate(priorities))
+    
+    while priorities:
+        n, p = priorities.popleft() # 1.
         
-        # 큐에 대기중인 프로세스 중 우선순위가 더 높은 프로세스가 있다면
-        if any(p < pri for _, pri in processes):
-            processes.append((i, p))
-            
-        else :
+        if any(p < comp for _, comp in priorities):
+            priorities.append((n, p)) # 2.
+        else:
             answer += 1
-            if i == location:
-                break
-
-    return answer
+            if n == location:
+                return answer
